@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Papa Ke Liye Surprise 🎁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #514332; /* Brown */
+            --secondary: #e6dfd6; /* Beige */
+            --bg-start: #fff9f0;
+            --bg-end: #fdf2e1;
+            --text: #41362b;
+            --button-yes: #4a6c38; /* Green */
+            --button-no: #8c5a4b; /* Brownish-Red */
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            text-align: center;
+            color: var(--text);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .container {
+            width: 85%;
+            max-width: 400px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        /* Screen 1: Click Here */
+        #screen-1 { display: block; }
+
+        /* Screen 2: Main Question */
+        #screen-2 { display: none; }
+
+        /* Screen 3: Response/Text display */
+        #screen-3 { display: none; padding-top: 20px;}
+
+        h1.main-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cute-p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .dancing-script {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 40px;
+        }
+
+        .cute-text-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--text);
+            line-height: 2;
+        }
+
+        /* Buttons Style */
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s, background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Green Yes Button */
+        .btn-yes {
+            background-color: var(--button-yes);
+            color: white;
+            flex: 1;
+        }
+
+        /* Reddish No Button */
+        .btn-no {
+            background-color: var(--button-no);
+            color: white;
+            flex: 1;
+        }
+
+        /* Full-width single button */
+        .btn-full {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            padding: 18px;
+            font-size: 1.1rem;
+        }
+
+        /* Emoji Size */
+        .emoji { font-size: 1.3rem; }
+
+    </style>
+</head>
+<body>
+
+    <!-- SCREEN 1: START/ASKING -->
+    <div class="container" id="screen-1">
+        <h1 class="main-title">Papa Ke Liye Ek Chhota Sa Surprise! 🎁</h1>
+        <p class="cute-p">Ek baat poochhni hai aapse... 😍</p>
+        <button class="btn btn-full" onclick="showScreen2()">Click Here ✨</button>
+    </div>
+
+    <!-- SCREEN 2: MAIN QUESTION -->
+    <div class="container" id="screen-2">
+        <p class="dancing-script">Papa, naye kapde dilado please? 🥺🛍️</p>
+        <div class="btn-container">
+            <button class="btn btn-yes" onclick="displayResponse('yes')">Haanji! <span class="emoji">✅</span></button>
+            <button class="btn btn-no" onclick="displayResponse('no')">No <span class="emoji">❌</span></button>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: Cute Text Display -->
+    <div class="container" id="screen-3">
+        <p class="dancing-script" id="cute-title"></p>
+        <div id="cute-texts"></div>
+    </div>
+
+    <script>
+        // Set the active screens
+        function showScreen2() {
+            document.getElementById('screen-1').style.display = 'none';
+            document.getElementById('screen-2').style.display = 'block';
+        }
+
+        function displayResponse(choice) {
+            document.getElementById('screen-2').style.display = 'none';
+            document.getElementById('screen-3').style.display = 'block';
+            
+            let titleEl = document.getElementById('cute-title');
+            let textsEl = document.getElementById('cute-texts');
+            
+            textsEl.innerHTML = ''; // clear previous content
+
+            if (choice === 'yes') {
+                titleEl.textContent = 'Aww! Best Papa in the World! ❤️';
+                // Add YES specific cute texts
+                let yesList = [
+                    "Main jaanti thi aap mana nahi karenge! 💖",
+                    "Aap duniya ke sabse pyaare papa ho. 😍"muahhh,
+                    "I love you so muchhhh! 🤗",
+                    "shopping karke aate hain! 💃🛍️"
+                ];
+                renderList(textsEl, yesList);
+            } else {
+                titleEl.textContent = 'Haww! 😲 Kya bola aapne?';
+                // Add NO specific cute texts from user prompt
+                let noList = [
+                    "\"Mere bubbuuu nhi ho?\"",
+                    "\"Please kuchupuchu kapde dilado\"",
+                    "\"Basss!kya he ye hn? Dar nhi lagta Ghar ke malkin se\" 😤"
+                    "\"NO OPTION LEFT!!!HUNH\"😤\"
+                ];
+                renderList(textsEl, noList);
+            }
+        }
+
+        function renderList(targetElement, listArray) {
+            let ul = document.createElement('ul');
+            ul.className = 'cute-text-list';
+            listArray.forEach(item => {
+                let li = document.createElement('li');
+                li.innerHTML = item;
+                ul.appendChild(li);
+            });
+            targetElement.appendChild(ul);
+        }
+    </script>
+</body>
+</html>
